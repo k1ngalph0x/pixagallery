@@ -5,10 +5,10 @@ import 'package:pixagallery/models/image_model.dart';
 
 class ApiService {
   static const String _baseUrl = 'https://pixabay.com/api/';
-  final API_KEY = dotenv.env['API_KEY'];
 
   Future<List<ImageModel>> fetchImages(
       {int page = 1, String query = ''}) async {
+    final API_KEY = dotenv.env['API_KEY'];
     final response = await http.get(
         Uri.parse('$_baseUrl?key=$API_KEY&q=$query&page=$page&per_page=20'));
 
