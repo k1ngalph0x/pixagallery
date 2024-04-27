@@ -1,16 +1,20 @@
-name: Gh-Pages
+name: Deploy Flutter Web App
 
 on:
   push:
-    branches: [master]
+    branches: [main] # Replace 'main' with your default branch name
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2 # Only works with v2
-      - uses: subosito/flutter-action@v1
-      - uses: bluefireteam/flutter-gh-pages@v7
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v2
+      - run: flutter config --enable-web
+      - run: flutter build web --release
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          customArgs: --dart-define="API_KEY=43599595-b82fe4f230200996650753507"
+          branch: gh-pages
+          folder: build/web
