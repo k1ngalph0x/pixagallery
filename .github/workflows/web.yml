@@ -1,0 +1,16 @@
+name: Gh-Pages
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2 # Only works with v2
+      - uses: subosito/flutter-action@v1
+      - uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          customArgs: --dart-define="API_KEY=43599595-b82fe4f230200996650753507"
